@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package elevatorsim;
-
-import sun.applet.Main;
 
 /*This class models the button within the elevator
  *
@@ -19,15 +12,15 @@ public class ElevatorButton {
     */
     //might enum statuses
    
-    private char symbol;
+    private String label;
     private boolean activated;
     
     public ElevatorButton(){
         
     }
-    public ElevatorButton (char charInput)
+    public ElevatorButton (String label)
     {
-        this.symbol = charInput;
+        this.label = label;
     }
     public void setActive (boolean isOn)
     {
@@ -37,23 +30,18 @@ public class ElevatorButton {
     {
         return activated;
     }
-    public void setSymbol(char a)
+    public void setSymbol(String a)
     {
-        this.symbol = a;
+        this.label = a;
     }
-    public char getSymbol ()
+    public String getSymbol ()
     {
-        return this.symbol;
+        return this.label;
     }
     
      public static void main(String[] args) {
      
-         ElevatorButton test1 = new ElevatorButton();    
-         test1.setSymbol('2');
-         if(test1.getSymbol() != '2')
-         {
-             System.out.print("setSymbol - FAIL\n");
-         }
+         ElevatorButton test1 = new ElevatorButton();            
          test1.setActive(true);
          if (!test1.isActivated())
          {
@@ -63,8 +51,8 @@ public class ElevatorButton {
          if (test1.isActivated())
          {
              System.out.print("setActive(deactive) - FAIL\n");
-         }               
-         
+         }     
+      
      }
             
     

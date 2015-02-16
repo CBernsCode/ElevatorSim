@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elevatorsim;
 
 /* This is the rider/person for the elevator sim. They will effectively populate 
@@ -12,16 +7,27 @@ package elevatorsim;
  */
 public class Rider {
 
-    private int startFloor;
+    private int startFloor = 0;
     private int destFloor;
+    private int startTime = 0;
+    private int stopTime = 0;
     private final int id;
     private static int idGen = 0;
     private static int ridersInQueue;
 
     public Rider() {
-
         this.id = ++idGen;
+    }
 
+    public Rider(int startFloor) {
+        this.startFloor = startFloor;
+        this.id = ++idGen;
+    }
+
+    public Rider(int startFloor, int destFloor) {
+        this.startFloor = startFloor;
+        this.destFloor = destFloor;
+        this.id = ++idGen;
     }
 
     public void setStartFlr(int a) {
@@ -34,6 +40,22 @@ public class Rider {
 
     public void setDestFlr(int a) {
         this.destFloor = a;
+    }
+
+    public int getStartTime() {
+        return this.startFloor;
+    }
+
+    public void setStartTime(int a) {
+        this.startTime = a;
+    }
+
+    public int getStopTime() {
+        return this.stopTime;
+    }
+
+    public void setStopTime(int a) {
+        this.stopTime = a;
     }
 
     public int getDestFloor() {
@@ -56,16 +78,17 @@ public class Rider {
         } else if (this.startFloor == this.destFloor) {
             //to-do same floor handler
         }
-
         return retVal;
     }
 
     public static int getRiderInQue() {
         return ridersInQueue;
     }
+    public int getTotalTime(){
+        return this.stopTime - this.startTime;
+    }
 
     public static void main(String[] args) {
-        // TODO code application logic here
 
         Rider a1 = new Rider();
         Rider a2 = new Rider();
@@ -89,7 +112,5 @@ public class Rider {
         if (Rider.getRiderInQue() != 0) {
             System.out.print("Riders remove from Que - FAIL\n");
         }
-        
-
     }
 }
