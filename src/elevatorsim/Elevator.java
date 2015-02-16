@@ -33,6 +33,15 @@ public class Elevator {
         }
         return retBool;
     }
+    
+    public boolean shouldStop (ElevatorButton button){
+        boolean retBool = false;
+        if(button.isActivated()){
+            retBool = true;
+        }
+        return retBool;
+    }
+    
 
     private void initButtons() {
         buttons = new ElevatorButton[Config.numFloors];
