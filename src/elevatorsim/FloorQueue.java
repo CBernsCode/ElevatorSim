@@ -3,40 +3,57 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package elevatorsim;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  *
  * @author chris
  */
-public class FloorQueue<T> implements RiderQ<T>{
+public class FloorQueue {
 
-    private int size;
-    private Node first, last;
-    
-    private class Node {
-        private T ele;
-        private Node next;
-    }
-    
-    @Override
-    public RiderQ<T> enqueue(T ele) {
-        
-        return this;
-       
+    Queue<Rider> floorQueue = new LinkedList<>();
+
+    public FloorQueue() {
+
     }
 
-    @Override
-    public T dequeue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void enqueue(Rider rider) {
+        floorQueue.add(rider);
+    }
+
+    Rider dequeue() {
+        Rider returnRider;
+        if (!isEmpty()) {
+            returnRider = floorQueue.remove();
+        } else {
+            returnRider = null;
+        }
+        return returnRider;
+    }
+
+    int getSize() {
+        return floorQueue.size();
+    }
+
+    boolean isEmpty() {
+        return floorQueue.isEmpty();
     }
     
-    private void clear(){
-        size = 0;
-        first = null;
-        last = null;
+    void clear(){
+        while(!floorQueue.isEmpty()){
+           dequeue();
+        }
     }
     
-    
+    Rider peek(){
+        Rider retRider = null;
+        if(!isEmpty()){
+            retRider = floorQueue.peek();
+        }
+        return retRider;
+    }
+
 }
