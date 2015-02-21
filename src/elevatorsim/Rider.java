@@ -1,6 +1,6 @@
 package elevatorsim;
 
-/* This is the rider/person for the elevator sim. They will effectively populate 
+/* This is the rider/person for the elevator sim. They will effectively populate
  * the simulator with riders
  *
  * @author Chris Berns
@@ -16,18 +16,18 @@ public class Rider {
     private static int ridersInQueue;
 
     public Rider() {
-        this.id = ++idGen;
+        this.id = idGen++;
     }
 
     public Rider(int startFloor) {
         this.startFloor = startFloor;
-        this.id = ++idGen;
+        this.id = idGen++;
     }
 
     public Rider(int startFloor, int destFloor) {
         this.startFloor = startFloor;
         this.destFloor = destFloor;
-        this.id = ++idGen;
+        this.id = idGen++;
     }
 
     public void setStartFlr(int a) {
