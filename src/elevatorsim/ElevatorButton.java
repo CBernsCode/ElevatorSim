@@ -13,7 +13,7 @@ public class ElevatorButton {
     //might enum statuses
    
     private String label;
-    private boolean activated;
+    public boolean activated;
     
     public ElevatorButton(){
         

@@ -15,6 +15,7 @@ public class Config {
     public static int numFloors = 1;
     public static int numElevators = 1;
     public static int numRiders = 0;
+    public static int capOfElevators = 10;
 
     public static void setNumFloors(int a) {
         numFloors = a;
