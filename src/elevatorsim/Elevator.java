@@ -1,10 +1,9 @@
-
 package elevatorsim;
 
 import java.util.LinkedList;
 
 /*This is the elevator for the simulator, is passed Riders from
- Floor queues depending on capcity and direction. The riders are 
+ Floor queues depending on capcity and direction. The riders are
  stored in linked list anchored to an array so that the current floor
  will point to the anchor with the right linked list.
  *
@@ -12,23 +11,27 @@ import java.util.LinkedList;
  */
 public class Elevator {
 
+    private static int idGen = 0;
     private int id;
     private int currentFloor;
-    private int destFloor;
     private int capacity;
     private int passengers;
     private ElevatorButton[] buttons;
     private LinkedList<Rider>[] anchors;
 
     public Elevator() {
+        id = idGen++;
         passengers = 0;
-        buildLinkAnchor();
+        currentFloor = 0;
+        initAnchors();
+        capacity = Config.capOfElevators;
     }
 
     public Elevator(int capacity) {
+        id = idGen++;
         passengers = 0;
         currentFloor = 0;
-        buildLinkAnchor();
+        initAnchors();
         this.capacity = capacity;
     }
 
@@ -46,14 +49,23 @@ public class Elevator {
 
     //NOT WORKING YET
     //get a rider, get dest floor, place on propper list
-    public void embarkPassengers(Rider rider) {
-       anchors[rider.getDestFloor()-1].add(rider);
+    public void embarkRider(Rider rider) {
+        try {
+            anchors[rider.getDestFloor() - 1].add(rider);
+        } catch (Exception e) {
+            System.out.println("Error in embarkRider");
+        }
     }
 
     public Rider disembarkRider() {
         Rider rider;
-        rider = anchors[this.currentFloor -1].removeLast();
-        return rider;
+        try {
+            rider = anchors[this.currentFloor - 1].removeLast();
+            return rider;
+        } catch (Exception e) {
+            System.out.println("Error in disembark");
+            return null;
+        }
     }
 
     public boolean isFull() {
@@ -64,48 +76,45 @@ public class Elevator {
         return retBool;
     }
 
-    public void nextStop() {
-        while (!anchors[this.currentFloor + 1].isEmpty()) {
-            destFloor++;
-        }
-    }
-
     //most likely refactored out
-    private void buildLinkAnchor() {
+    private void initAnchors() {
 
         this.anchors = new LinkedList[Config.numFloors];
         for (int i = 0; i < anchors.length; i++) {
             anchors[i] = new LinkedList();
         }
-
     }
-    
-    public void loadRider(Rider rider, int wantedFloor){
+
+    //testing function
+    private void loadRider(Rider rider, int wantedFloor) {
         anchors[wantedFloor - 1].add(rider);
     }
 
-    public void setCurrentFloor(int currentFloor) {
+    //testing function, will be handled by controller
+    private void setCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor;
-    }
-
-    public void elevatorArrive() {
-
     }
 
     public static void main(String[] args) {
 
         Config.numFloors = 10;
+        Config.capOfElevators = 10;
         Elevator ele = new Elevator(Config.capOfElevators);
         ele.setCurrentFloor(1);
         Rider testRider = new Rider(1, 8);
         ele.setCurrentFloor(2);
-        Rider test1Rider = new Rider(2, 9);
+        Rider test1Rider;
         ele.setCurrentFloor(8);
-        Rider nextRider = new Rider(2,8);
-        ele.loadRider(nextRider, 8);
+        Rider nextRider = new Rider(2, 8);
+        //ele.loadRider(nextRider, 8);
+        ele.embarkRider(nextRider);
+        ele.embarkRider(testRider);
         test1Rider = ele.disembarkRider();
         System.out.println(test1Rider.getDestFloor());
         System.out.println(test1Rider.getStartFlr());
+        System.out.println(ele.disembarkRider().getStartFlr());
+        //make sure it throw error here
+        ele.disembarkRider();
 
     }
 
