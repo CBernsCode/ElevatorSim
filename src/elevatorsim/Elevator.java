@@ -44,7 +44,7 @@ public class Elevator {
         this.passengers = passengers;
     }
 
-    //NOT WORKING YET
+    //########## NOT WORKING YET ########################
     //get a rider, get dest floor, place on propper list
     public void embarkPassengers(Rider rider) {
        anchors[rider.getDestFloor()-1].add(rider);

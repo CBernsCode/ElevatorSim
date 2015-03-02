@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elevatorsim;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * FloorQueue will be the lines on each floor for going up and going down they
+ * will also be what is used to determine the state of the elevator button The
+ * FloorQueue is implemented as a linked list and will null is dequeue is called
+ * on an empty list
+ *
  *
  * @author chris
  */
@@ -41,19 +41,43 @@ public class FloorQueue {
     boolean isEmpty() {
         return floorQueue.isEmpty();
     }
-    
-    void clear(){
-        while(!floorQueue.isEmpty()){
-           dequeue();
+
+    void clear() {
+        while (!floorQueue.isEmpty()) {
+            dequeue();
         }
     }
-    
-    Rider peek(){
+
+    Rider peek() {
         Rider retRider = null;
-        if(!isEmpty()){
+        if (!isEmpty()) {
             retRider = floorQueue.peek();
         }
         return retRider;
     }
 
+    public static void main(String[] args) {
+
+        Rider testrider = new Rider(1, 8);
+        Rider testrider1;
+        System.out.println(testrider.getDestFloor());
+        FloorQueue flQue = new FloorQueue();
+        flQue.enqueue(testrider);
+        testrider1 = flQue.dequeue();
+        System.out.println(testrider1.getDestFloor());
+        Rider[] riders = new Rider[10];
+        Config.numFloors = 30;
+        for (int i = 0; i < riders.length; i++) {
+            riders[i] = new Rider(i, (int) (Math.random() * Config.numFloors + 1));
+            flQue.enqueue(riders[i]);
+        }
+        for (int i = 0; i < riders.length; i++) {
+            Rider holder;
+            holder = flQue.dequeue();
+            System.out.println(holder.getStartFlr());
+            System.out.println(holder.getDestFloor());
+
+        }
+
+    }
 }
