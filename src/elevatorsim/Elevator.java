@@ -12,7 +12,7 @@ import java.util.LinkedList;
 public class Elevator {
 
     private static int idGen = 0;
-    private int id;
+    private final int id;
     private int currentFloor;
     private int capacity;
     private int passengers;
@@ -47,7 +47,6 @@ public class Elevator {
         this.passengers = passengers;
     }
 
-    //NOT WORKING YET
     //get a rider, get dest floor, place on propper list
     public void embarkRider(Rider rider) {
         try {
@@ -58,14 +57,14 @@ public class Elevator {
     }
 
     public Rider disembarkRider() {
-        Rider rider;
+        Rider rider = null;
         try {
             rider = anchors[this.currentFloor - 1].removeLast();
-            return rider;
+           
         } catch (Exception e) {
-            System.out.println("Error in disembark");
-            return null;
+            System.out.println("Error in disembark");            
         }
+        return rider;
     }
 
     public boolean isFull() {
@@ -113,7 +112,7 @@ public class Elevator {
         System.out.println(test1Rider.getDestFloor());
         System.out.println(test1Rider.getStartFlr());
         System.out.println(ele.disembarkRider().getStartFlr());
-        //make sure it throw error here
+        //make sure it throws error here
         ele.disembarkRider();
 
     }
