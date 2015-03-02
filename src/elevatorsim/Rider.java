@@ -1,10 +1,5 @@
 package elevatorsim;
 
-/* This is the rider/person for the elevator sim. They will effectively populate
- * the simulator with riders
- *
- * @author Chris Berns
- */
 public class Rider {
 
     private int startFloor = 0;
@@ -84,7 +79,8 @@ public class Rider {
     public static int getRiderInQue() {
         return ridersInQueue;
     }
-    public int getTotalTime(){
+
+    public int getTotalTime() {
         return this.stopTime - this.startTime;
     }
 
