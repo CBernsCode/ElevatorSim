@@ -38,7 +38,7 @@ public class Rider {
     }
 
     public int getStartTime() {
-        return this.startFloor;
+        return this.startTime;
     }
 
     public void setStartTime(int a) {
@@ -58,6 +58,7 @@ public class Rider {
     }
 
     //I wanted to add ability to track total waiting in que
+    //MIGHT TOSS
     public void callElevator() {
         ridersInQueue++;
     }
@@ -76,6 +77,7 @@ public class Rider {
         return retVal;
     }
 
+    //can use to update the gui
     public static int getRiderInQue() {
         return ridersInQueue;
     }

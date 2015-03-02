@@ -60,9 +60,9 @@ public class Elevator {
         Rider rider = null;
         try {
             rider = anchors[this.currentFloor - 1].removeLast();
-           
+
         } catch (Exception e) {
-            System.out.println("Error in disembark");            
+            System.out.println("Error in disembark");
         }
         return rider;
     }
