@@ -99,8 +99,8 @@ public class Elevator {
         Config.numFloors = 10;
         Config.capOfElevators = 10;
         Elevator ele = new Elevator(Config.capOfElevators);
-        ele.setCurrentFloor(1);
-        Rider testRider = new Rider(1, 8);
+        ele.setCurrentFloor(0);
+        Rider testRider = new Rider(0, 8);
         ele.setCurrentFloor(2);
         Rider test1Rider;
         ele.setCurrentFloor(8);
