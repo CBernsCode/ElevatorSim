@@ -7,14 +7,16 @@ package elevatorsim;
  */
 public class Config {
 
+    public enum simType{NORMAL , HIGH_VOLUME, OFFICE, RETAIL}
     public static String title = "Elevator Sim";
     public static int numFloors = 1;
     public static int numElevators = 1;
     public static int numRiders = 0;
     public static int capOfElevators = 10;
+    public static simType typeOfSim = simType.NORMAL;
 
     public static void setNumFloors(int a) {
-        numFloors = a;
+        numFloors = a;        
     }
 
     public static void setNumElevators(int a) {
@@ -47,6 +49,29 @@ public class Config {
             riders[i] = new Rider(startFloor, stopFloor);
         }
         return riders;
+    }
+    
+    public static void setTypeOfSim (simType a){
+        switch (a){
+            
+            case NORMAL:
+                Config.typeOfSim = simType.NORMAL;
+                break;
+            case HIGH_VOLUME:
+                Config.typeOfSim = simType.HIGH_VOLUME;
+                break;
+            case OFFICE:
+                Config.typeOfSim = simType.OFFICE;
+                break;
+            case RETAIL:
+                Config.typeOfSim = simType.RETAIL;
+                break;
+            default:
+                System.out.println("Not set");
+                break;
+                
+            
+        }
     }
     
     /*To-Do make a method that reads from a text file and uses it
