@@ -81,6 +81,7 @@ public class Elevator {
         this.anchors = new LinkedList[Config.numFloors];
         for (int i = 0; i < anchors.length; i++) {
             anchors[i] = new LinkedList();
+         
         }
     }
 

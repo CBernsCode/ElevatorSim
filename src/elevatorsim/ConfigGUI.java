@@ -5,48 +5,33 @@
  */
 package elevatorsim;
 
-import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
-import java.text.NumberFormat;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.AdjustmentListener;
+import javax.swing.JFrame;
 
 /**
  *
  * @author chris
  */
-public class ConfigGUI extends JFrame implements ActionListener {
-    
-    JPanel panel = new JPanel();
-    JFrame frame = new JFrame();
-    NumberFormat amountFormat = NumberFormat.getNumberInstance();
-    JFormattedTextField numElevators = new JFormattedTextField(amountFormat);
+public class ConfigGUI {
 
-    public ConfigGUI() throws HeadlessException {
+    public ConfigGUI() {
+        JFrame frame = new JFrame();
+        frame.setTitle("Elevator Configuration");
+        frame.setSize(500, 500);
         
-        frame.setSize(250, 250);
-       
         
-    }
-   
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void init(){
-        panel.add(numElevators);
-        frame.add(panel);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
     }
-    
-    public static void main(String[] args){
+
+    public static void main (String[] args){
         
         ConfigGUI gui = new ConfigGUI();
-        gui.init();
-        
-        
     }
-
+    
 }
