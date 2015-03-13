@@ -1,6 +1,8 @@
 
 package elevatorsim;
 
+import java.util.Random;
+
 /**
  *
  * @author Chris Berns
@@ -51,27 +53,18 @@ public class Config {
         return riders;
     }
     
-    public static void setTypeOfSim (simType a){
-        switch (a){
-            
-            case NORMAL:
-                Config.typeOfSim = simType.NORMAL;
-                break;
-            case HIGH_VOLUME:
-                Config.typeOfSim = simType.HIGH_VOLUME;
-                break;
-            case OFFICE:
-                Config.typeOfSim = simType.OFFICE;
-                break;
-            case RETAIL:
-                Config.typeOfSim = simType.RETAIL;
-                break;
-            default:
-                System.out.println("Not set");
-                break;
-                
-            
+    public static Rider[] initRiders(){
+        Random rand = new Random(System.currentTimeMillis());
+        Rider[] riders = new Rider[numRiders];
+        
+        //add different types of generating based off type
+        for(Rider rdrs : riders){
+            rdrs.setStartFlr(0);
+            rdrs.setDestFlr(rand.nextInt(numFloors) + 1 );
         }
+        
+        return riders;
+        
     }
     
     /*To-Do make a method that reads from a text file and uses it

@@ -7,7 +7,7 @@
 package elevatorsim;
 
 /*The building holds all of the individual objects and the controller for the
- *Elevators *
+ *Elevators  and places the riders on the correct floor
  * @author chris
  */
 public class Buillding {
@@ -23,12 +23,13 @@ public class Buillding {
         this.floors = new Floor[Config.numFloors];        
     }
     
+    //this constr takes the array of people and places them in the building
     public Buillding(Rider[] riders){
         this.elevators = new Elevator[Config.numElevators];
         this.eleController = new ElevatorController();
         this.floors = new Floor[Config.numFloors];
         for(Rider rdrs : riders){
-            //to-do place riders on floors
+            floors[rdrs.getStartFlr()].joinLine(rdrs);
         }
         
     }
