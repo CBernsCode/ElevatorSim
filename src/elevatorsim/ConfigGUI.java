@@ -16,8 +16,12 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-/** This class is based off example from BB and also official Java tutorials 
- * and docs
+/**
+ * This class is based off example from BB and also official Java tutorials and
+ * docs
+ *
+ * Sliders make controlling input so much easier
+ *
  * @author chris
  */
 public class ConfigGUI extends JFrame {
@@ -75,8 +79,6 @@ public class ConfigGUI extends JFrame {
         JFrame gonfigGUI = new ConfigGUI();
     }
 
-  
-
     class RiderAdjustmentListener implements ChangeListener {
 
         @Override
@@ -86,9 +88,7 @@ public class ConfigGUI extends JFrame {
                 Config.numRiders = (int) source.getValue();
                 System.out.println(Config.numRiders);
             }
-
         }
-
     }
 
     class FloorsAdjustmentListener implements ChangeListener {
@@ -98,14 +98,12 @@ public class ConfigGUI extends JFrame {
             JSlider source = (JSlider) ce.getSource();
             if (!source.getValueIsAdjusting()) {
                 Config.numFloors = (int) source.getValue();
-                if(Config.numFloors < 1){
+                if (Config.numFloors < 1) {
                     Config.numFloors = 1;
                 }
                 System.out.println(Config.numFloors);
             }
-
         }
-
     }
 }
 
@@ -118,7 +116,5 @@ class ElevatorAdjustmentListener implements ChangeListener {
             Config.numElevators = (int) source.getValue();
             System.out.println(Config.numElevators);
         }
-
     }
-
 }

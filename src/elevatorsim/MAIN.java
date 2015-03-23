@@ -17,7 +17,11 @@ public class MAIN {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Clock clock = new Clock();
         
+        //need to set up signal from GUI before Builing is run
+        ConfigGUI gui = new ConfigGUI();
+        Building building = new Building(Config.initRiders());
         
     }
     

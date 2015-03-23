@@ -10,21 +10,21 @@ package elevatorsim;
  *Elevators  and places the riders on the correct floor
  * @author chris
  */
-public class Buillding {
+public class Building {
     
     private Elevator[] elevators;
     private ElevatorController eleController;
     private Floor[] floors;
     
     
-    public Buillding(){
+    public Building(){
         this.elevators = new Elevator[Config.numElevators];
         this.eleController = new ElevatorController();
         this.floors = new Floor[Config.numFloors];        
     }
     
     //this constr takes the array of people and places them in the building
-    public Buillding(Rider[] riders){
+    public Building(Rider[] riders){
         this.elevators = new Elevator[Config.numElevators];
         this.eleController = new ElevatorController();
         this.floors = new Floor[Config.numFloors];
