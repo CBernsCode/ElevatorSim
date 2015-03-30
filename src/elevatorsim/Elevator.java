@@ -11,6 +11,10 @@ import java.util.LinkedList;
  */
 public class Elevator {
 
+    public enum elevatorDirections {
+
+        DOWN, NONE, UP
+    };
     private static int idGen = 0;
     private final int id;
     private int currentFloor;
@@ -23,7 +27,7 @@ public class Elevator {
         id = idGen++;
         passengers = 0;
         currentFloor = 0;
-        initAnchors();
+        init();
         capacity = Config.capOfElevators;
     }
 
@@ -31,7 +35,7 @@ public class Elevator {
         id = idGen++;
         passengers = 0;
         currentFloor = 0;
-        initAnchors();
+        init();
         this.capacity = capacity;
     }
 
@@ -50,49 +54,86 @@ public class Elevator {
     //get a rider, get dest floor, place on propper list
     public void embarkRider(Rider rider) {
         try {
-            anchors[rider.getDestFloor() - 1].add(rider);
+            anchors[rider.getDestFloor()].add(rider);
         } catch (Exception e) {
             System.out.println("Error in embarkRider");
         }
+        opperateButtons();
     }
 
     public Rider disembarkRider() {
         Rider rider = null;
         try {
-            rider = anchors[this.currentFloor - 1].removeLast();
+            rider = anchors[this.currentFloor].removeLast();
 
         } catch (Exception e) {
             System.out.println("Error in disembark");
         }
+        opperateButtons();
         return rider;
     }
 
     public boolean isFull() {
         boolean retBool = false;
-        if (this.capacity == this.passengers) {
+        if (this.capacity <= this.passengers) {
             retBool = true;
         }
         return retBool;
     }
 
-    //most likely refactored out
-    private void initAnchors() {
+    public int getCurrentFloor() {
+        return this.currentFloor;
+    }
+
+    public void moveUp() {
+        this.currentFloor++;
+        while (anchors[currentFloor].isEmpty() == false) {
+            disembarkRider();
+        }
+        opperateButtons();
+    }
+
+    public void moveDown() {
+        this.currentFloor++;
+        while (anchors[currentFloor].isEmpty() == false) {
+            disembarkRider();
+        }
+        opperateButtons();
+    }
+
+    public ElevatorButton[] getButtons() {
+        return buttons;
+    }
+
+    private void init() {
 
         this.anchors = new LinkedList[Config.numFloors];
-        for (int i = 0; i < anchors.length; i++) {
-            anchors[i] = new LinkedList();
-         
+        this.buttons = new ElevatorButton[Config.numFloors];
+        for (int i = 0; i < Config.numFloors; i++) {
+            anchors[i] = new <Rider>LinkedList();
+            buttons[i] = new ElevatorButton(Integer.toString(i));
         }
+
     }
 
     //testing function
     private void loadRider(Rider rider, int wantedFloor) {
-        anchors[wantedFloor - 1].add(rider);
+        anchors[wantedFloor].add(rider);
     }
 
     //testing function, will be handled by controller
     private void setCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor;
+    }
+
+    private void opperateButtons() {
+        for (int i = 0; i < Config.numFloors; i++) {
+            if (anchors[i].isEmpty()) {
+                buttons[i].setActive(false);
+            } else {
+                buttons[i].setActive(true);
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -9,18 +9,25 @@ public class Floor {
     private int id;
 
     //first index nuber of elevators, second up/down    
-    private ElevatorButton upButton = new ElevatorButton("Up");
-    private ElevatorButton downButton = new ElevatorButton("Down");
+    private ElevatorButton upButton;
+    private ElevatorButton downButton;
 
-    private FloorQueue waitUp = new FloorQueue();
-    private FloorQueue waitDown = new FloorQueue();
+    private FloorQueue waitUp;
+    private FloorQueue waitDown;
 
     public Floor() {
-
+        upButton = new ElevatorButton("Up");
+        downButton = new ElevatorButton("Down");
+        waitUp = new FloorQueue();
+        waitDown = new FloorQueue();
     }
 
     public Floor(int number) {
         this.id = number;
+        upButton = new ElevatorButton("Up");
+        downButton = new ElevatorButton("Down");
+        waitUp = new FloorQueue();
+        waitDown = new FloorQueue();
     }
 
     public void joinLine(Rider rider) {
