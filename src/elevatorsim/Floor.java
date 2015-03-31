@@ -11,7 +11,6 @@ public class Floor {
     //first index nuber of elevators, second up/down    
     private ElevatorButton upButton;
     private ElevatorButton downButton;
-
     private FloorQueue waitUp;
     private FloorQueue waitDown;
 
@@ -36,6 +35,7 @@ public class Floor {
         } else {
             waitDown.enqueue(rider);
         }
+        setButton();
     }
 
     private void setButton() {
@@ -56,6 +56,7 @@ public class Floor {
         if (upButton.isActivated()) {
             retBool = true;
         }
+        setButton();        
         return retBool;
     }
 
@@ -64,7 +65,34 @@ public class Floor {
         if (downButton.isActivated()) {
             retBool = true;
         }
+        setButton();
         return retBool;
+    }
+
+    public Rider getFromDownQue() {
+        Rider retRider = null;
+        if (hasRidersGoingDown()) {
+            retRider = waitDown.dequeue();
+        }
+        setButton();
+        return retRider;
+    }
+
+    public Rider getFromUpQue() {
+        Rider retRider = null;
+        if (hasRidersGoingUp()) {
+            retRider = waitUp.dequeue();
+        }
+        setButton();
+        return retRider;
+    }
+    
+    public FloorQueue getUpQue(){
+        return this.waitUp;
+    }
+    
+    public FloorQueue getDownQue(){
+        return this.waitDown;
     }
 
     public static void main(String[] args) {
@@ -84,7 +112,10 @@ public class Floor {
         if (floor1.hasRidersGoingDown()) {
             System.out.println("Rider Going DOWN - PASS");
         }
-        
+        Rider test;
+        test = floor1.getFromDownQue();
+        System.out.println(test.getStartFlr());
+
     }
 
 }

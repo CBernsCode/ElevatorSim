@@ -42,7 +42,7 @@ public class Building {
 
     }
 
-    private void loadRiders(Rider[] riders) {
+    public void loadRiders(Rider[] riders) {
         for (Rider rdrs : riders) {
             this.floors[rdrs.getStartFlr()].joinLine(rdrs);
         }

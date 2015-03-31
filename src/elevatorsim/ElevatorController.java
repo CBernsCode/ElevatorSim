@@ -28,10 +28,16 @@ public class ElevatorController {
 
         if (status == direction.UP) { //based on buttons in elevator
             ele.moveUp();
+            while (floors[ele.getCurrentFloor()].hasRidersGoingUp()) {
+                ele.embarkRider(floors[ele.getCurrentFloor()].getUpQue().dequeue());
+            }
             System.out.println("UP");
 
         } else if (status == direction.DOWN) {
             ele.moveDown();
+            while (floors[ele.getCurrentFloor()].hasRidersGoingDown()) {
+                ele.embarkRider(floors[ele.getCurrentFloor()].getDownQue().dequeue());
+            }
             System.out.println("DOWN");
         }
         if (status == direction.NONE) {
@@ -49,12 +55,17 @@ public class ElevatorController {
             }
             if (upCounter > downCounter) {
                 ele.moveUp();
+                while (floors[ele.getCurrentFloor()].hasRidersGoingUp()) {
+                    ele.embarkRider(floors[ele.getCurrentFloor()].getUpQue().dequeue());
+                }
                 System.out.println("UP, based on floor");
-            } else {
+            } else if (downCounter > upCounter) {
                 ele.moveDown();
+                while (floors[ele.getCurrentFloor()].hasRidersGoingDown()) {
+                    ele.embarkRider(floors[ele.getCurrentFloor()].getFromDownQue());
+                }
                 System.out.println("DOWN, based on Floor");
             }
-
         }
     }
 
@@ -79,97 +90,22 @@ public class ElevatorController {
         Config.numElevators = 2;
         Config.numFloors = 10;
         Config.numRiders = 20;
-        Rider[] riders = Config.generateRiders(1, 7);
+        Rider[] riders = Config.generateRiders(1, rand.nextInt(Config.numFloors));
         Building building = new Building(riders);
+        System.out.println(building.getFloors()[0].hasRidersGoingUp());
+        System.out.println(building.getFloors()[1].hasRidersGoingUp());
+        System.out.println(building.getFloors()[2].hasRidersGoingUp());
         Rider rdr1 = new Rider(0, 8);
         Rider rdr2 = new Rider(8, 0);
         Elevator[] elevators = building.getElevators();
 
-        elevators[0].setCurrentFloor(0);
-        elevators[1].setCurrentFloor(Config.numFloors - 1);
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        elevators[0].moveUp();
-        elevators[1].moveDown();
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        elevators[0].embarkRider(rdr1);
-        elevators[1].embarkRider(rdr2);
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-        eleCont.moveElevator(elevators[0], building.getFloors());
-        eleCont.moveElevator(elevators[1], building.getFloors());
-        System.out.println(elevators[0].getCurrentFloor());
-        System.out.println(elevators[1].getCurrentFloor());
-
+        for (int i = 0; i < 20; i++) {
+            eleCont.moveElevator(elevators[0], building.getFloors());
+            eleCont.moveElevator(elevators[1], building.getFloors());
+            System.out.println(elevators[0].getCurrentFloor());
+            System.out.println(elevators[1].getCurrentFloor());
+        }
     }
-
 }
 
 /*

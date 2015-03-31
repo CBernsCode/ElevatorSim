@@ -41,7 +41,7 @@ public class ConfigGUI extends JFrame {
         add(sliderLabel);
         add(elevatorSlider);
 
-        JLabel floorsLabel = new JLabel("Number of Floors");
+        JLabel floorsLabel = new JLabel("Number of Floors" + Config.numFloors);
         JSlider floorsSlider = new JSlider(0, 101, 1);
         floorsSlider.setMajorTickSpacing(10);
         floorsSlider.setPaintLabels(true);
