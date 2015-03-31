@@ -84,9 +84,15 @@ public class Elevator {
     public int getCurrentFloor() {
         return this.currentFloor;
     }
+    
+    public void setCurrentFloor(int a){
+        this.currentFloor = a;
+    }
 
     public void moveUp() {
-        this.currentFloor++;
+        if (this.currentFloor < Config.numFloors - 1) {
+            this.currentFloor++;
+        }
         while (anchors[currentFloor].isEmpty() == false) {
             disembarkRider();
         }
@@ -94,8 +100,11 @@ public class Elevator {
     }
 
     public void moveDown() {
-        this.currentFloor++;
-        while (anchors[currentFloor].isEmpty() == false) {
+        if (this.currentFloor > 0) {
+            this.currentFloor--;
+        }
+        while (anchors[currentFloor].isEmpty()
+                == false) {
             disembarkRider();
         }
         opperateButtons();
@@ -119,11 +128,6 @@ public class Elevator {
     //testing function
     private void loadRider(Rider rider, int wantedFloor) {
         anchors[wantedFloor].add(rider);
-    }
-
-    //testing function, will be handled by controller
-    private void setCurrentFloor(int currentFloor) {
-        this.currentFloor = currentFloor;
     }
 
     private void opperateButtons() {
