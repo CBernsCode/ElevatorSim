@@ -21,7 +21,10 @@ public class ElevatorButton {
     public ElevatorButton (String label)
     {
         this.label = label;
+        this.activated = false;
     }
+    
+    
     public void setActive (boolean isOn)
     {
         this.activated = isOn;

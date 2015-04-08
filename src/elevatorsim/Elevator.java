@@ -29,6 +29,7 @@ public class Elevator {
         currentFloor = 0;
         init();
         capacity = Config.capOfElevators;
+        opperateButtons();
     }
 
     public Elevator(int capacity) {
@@ -37,6 +38,7 @@ public class Elevator {
         currentFloor = 0;
         init();
         this.capacity = capacity;
+        opperateButtons();
     }
 
     public void setCapacity(int capacity) {
@@ -47,14 +49,11 @@ public class Elevator {
         return this.capacity;
     }
 
-    public void setNumPassengers(int passengers) {
-        this.passengers = passengers;
-    }
-
     //get a rider, get dest floor, place on propper list
     public void embarkRider(Rider rider) {
         try {
             anchors[rider.getDestFloor()].add(rider);
+            passengers++;
         } catch (Exception e) {
             System.out.println("Error in embarkRider");
         }
@@ -65,6 +64,7 @@ public class Elevator {
         Rider rider = null;
         try {
             rider = anchors[this.currentFloor].removeLast();
+            passengers--;
 
         } catch (Exception e) {
             System.out.println("Error in disembark");
@@ -81,11 +81,23 @@ public class Elevator {
         return retBool;
     }
 
+    public boolean isEmpty() {
+        boolean retVal = true;
+        if (passengers > 0) {
+            retVal = false;
+        }
+        return retVal;
+    }
+
+    public int getPassengers() {
+        return this.passengers;
+    }
+
     public int getCurrentFloor() {
         return this.currentFloor;
     }
-    
-    public void setCurrentFloor(int a){
+
+    public void setCurrentFloor(int a) {
         this.currentFloor = a;
     }
 
@@ -93,25 +105,37 @@ public class Elevator {
         if (this.currentFloor < Config.numFloors - 1) {
             this.currentFloor++;
         }
-        while (anchors[currentFloor].isEmpty() == false) {
-            disembarkRider();
-        }
-        opperateButtons();
+
     }
 
     public void moveDown() {
         if (this.currentFloor > 0) {
             this.currentFloor--;
         }
-        while (anchors[currentFloor].isEmpty()
-                == false) {
-            disembarkRider();
-        }
-        opperateButtons();
     }
 
     public ElevatorButton[] getButtons() {
         return buttons;
+    }
+
+    public boolean hasRidersGoingUp() {
+        boolean retVal = false;
+        for (int i = this.currentFloor; i < Config.numFloors; i++) {
+            if (buttons[i].isActivated()) {
+                retVal = true;
+            }
+        }
+        return retVal;
+    }
+
+    public boolean hasRidersGoingDown() {
+        boolean retVal = false;
+        for (int i = this.currentFloor; i >= 0; i--) {
+            if (buttons[i].isActivated()) {
+                retVal = true;
+            }
+        }
+        return retVal;
     }
 
     private void init() {
@@ -123,11 +147,6 @@ public class Elevator {
             buttons[i] = new ElevatorButton(Integer.toString(i));
         }
 
-    }
-
-    //testing function
-    private void loadRider(Rider rider, int wantedFloor) {
-        anchors[wantedFloor].add(rider);
     }
 
     private void opperateButtons() {
@@ -145,21 +164,17 @@ public class Elevator {
         Config.numFloors = 10;
         Config.capOfElevators = 10;
         Elevator ele = new Elevator(Config.capOfElevators);
+        Rider test1 = new Rider(0, Config.numFloors - 1);
+        Rider test2 = new Rider(Config.numFloors - 1, 0);
         ele.setCurrentFloor(0);
-        Rider testRider = new Rider(0, 8);
-        ele.setCurrentFloor(2);
-        Rider test1Rider;
-        ele.setCurrentFloor(8);
-        Rider nextRider = new Rider(2, 8);
-        //ele.loadRider(nextRider, 8);
-        ele.embarkRider(nextRider);
-        ele.embarkRider(testRider);
-        test1Rider = ele.disembarkRider();
-        System.out.println(test1Rider.getDestFloor());
-        System.out.println(test1Rider.getStartFlr());
-        System.out.println(ele.disembarkRider().getStartFlr());
-        //make sure it throws error here
-        ele.disembarkRider();
+        System.out.println(ele.hasRidersGoingUp());
+
+        ele.embarkRider(test1);
+        ele.setCurrentFloor(Config.numFloors - 2);
+        System.out.println(ele.hasRidersGoingUp());
+
+        ele.moveUp();
+        System.out.println(ele.hasRidersGoingUp());
 
     }
 

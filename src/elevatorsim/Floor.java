@@ -1,5 +1,7 @@
 package elevatorsim;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author chris
@@ -13,12 +15,14 @@ public class Floor {
     private ElevatorButton downButton;
     private FloorQueue waitUp;
     private FloorQueue waitDown;
+    private LinkedList <Rider> onFloor; 
 
     public Floor() {
         upButton = new ElevatorButton("Up");
         downButton = new ElevatorButton("Down");
         waitUp = new FloorQueue();
         waitDown = new FloorQueue();
+        onFloor = new LinkedList<>();
     }
 
     public Floor(int number) {
@@ -27,6 +31,7 @@ public class Floor {
         downButton = new ElevatorButton("Down");
         waitUp = new FloorQueue();
         waitDown = new FloorQueue();
+        onFloor = new LinkedList<>();
     }
 
     public void joinLine(Rider rider) {
@@ -36,6 +41,10 @@ public class Floor {
             waitDown.enqueue(rider);
         }
         setButton();
+    }
+    
+    public void addToOnFloor(Rider rdr){
+        onFloor.add(rdr);
     }
 
     private void setButton() {

@@ -23,6 +23,31 @@ public class ElevatorController {
 
     }
 
+    public void moveElevator(Elevator[] elevators, Floor[] floors) {
+        direction[] moves = new direction[Config.numElevators];
+        for(int i = 0 ; i < elevators.length; i++){
+            if(elevators[i].hasRidersGoingUp()){
+                moves[i] = direction.UP;
+            }else if(elevators[i].hasRidersGoingDown()){
+                moves[i] = direction.DOWN;
+            }else{
+                moves[i] = direction.NONE;
+            }
+        }
+        //make choices for empty elevators here. Figure out their direction or none
+        
+        for ( int i = 0 ; i < elevators.length; i++){
+            if(moves[i] == direction.UP){
+                elevators[i].moveUp();
+            }else if (moves[i] == direction.DOWN){
+                elevators[i].moveDown();
+            }
+        }
+        //After we have moved all elevators run the loaders and unloaders
+        //unload all
+        //take on all
+    } 
+
     public void moveElevator(Elevator ele, Floor[] floors) {
         direction status = deriveDirection(ele);
 
@@ -84,27 +109,16 @@ public class ElevatorController {
         return retVal;
     }
 
-    public static void main(String[] args) {
-        Random rand = new Random(System.currentTimeMillis());
-        ElevatorController eleCont = new ElevatorController();
-        Config.numElevators = 2;
-        Config.numFloors = 10;
-        Config.numRiders = 20;
-        Rider[] riders = Config.generateRiders(1, rand.nextInt(Config.numFloors));
-        Building building = new Building(riders);
-        System.out.println(building.getFloors()[0].hasRidersGoingUp());
-        System.out.println(building.getFloors()[1].hasRidersGoingUp());
-        System.out.println(building.getFloors()[2].hasRidersGoingUp());
-        Rider rdr1 = new Rider(0, 8);
-        Rider rdr2 = new Rider(8, 0);
-        Elevator[] elevators = building.getElevators();
-
-        for (int i = 0; i < 20; i++) {
-            eleCont.moveElevator(elevators[0], building.getFloors());
-            eleCont.moveElevator(elevators[1], building.getFloors());
-            System.out.println(elevators[0].getCurrentFloor());
-            System.out.println(elevators[1].getCurrentFloor());
+    private void embarkRiders(Floor flr, Elevator ele) {
+        if (ele.hasRidersGoingUp()) {
+            while (flr.hasRidersGoingUp() && !ele.isFull()) {
+                ele.embarkRider(flr.getFromUpQue());
+            }
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 
@@ -124,5 +138,16 @@ public class ElevatorController {
 
  if the the a button is pressed and is a dest floor of the rider - STOP,
  if the button of the current floor is activated and the elevator is not full it stops
+
+ the controller takes a building and breaks it down. It will move all of the 
+ elevators that have passengers in the direction the pasengers desire. When 
+ all of these moves are completed we will then look at the floors. We mark all 
+ the floors and all of the elevators that are not moving for the passengers. We 
+ will dispatch and update the list of the elevators not moving and the floors that
+ need service and call the appropriate moveUp/ moveDown. This is good because if
+ we assume the elevators with passengers is going to intercept and it is full the 
+ wait will be worse and the elevator being less efficient. If we are wrong the 
+ elevator will already be working and help with volume and also make sure that we
+ can move the rider. Also good because it will keep a float constantly. 
 
  */
