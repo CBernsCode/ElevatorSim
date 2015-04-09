@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class Config {
 
-    public enum simType{NORMAL , HIGH_VOLUME, OFFICE, RETAIL}
+    public enum simType{NORMAL , ASSENT, DESSENT}
     public static String title = "Elevator Sim";
     public static int numFloors = 1;
     public static int numElevators = 1;
@@ -58,9 +58,8 @@ public class Config {
         Rider[] riders = new Rider[numRiders];
         
         //add different types of generating based off type
-        for(Rider rdrs : riders){
-            rdrs.setStartFlr(0);
-            rdrs.setDestFlr(rand.nextInt(numFloors) + 1 );
+        for(int i = 0 ; i < riders.length; i++){
+            riders[i] = new Rider(0,Config.numFloors -1);
         }
         
         return riders;
@@ -96,6 +95,7 @@ public class Config {
         if (Config.numRiders != 20) {
             System.out.print("Number of Floors not set");
         }
+        Rider[] riders = Config.generateRiders();
     }
 
 }

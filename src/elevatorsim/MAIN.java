@@ -22,6 +22,11 @@ public class MAIN {
         //need to set up signal from GUI before Builing is run
         ConfigGUI gui = new ConfigGUI();
         Building building = new Building(Config.initRiders());
+        ElevatorController contoller = new ElevatorController();
+        
+        contoller.moveElevators(building.getElevators(), building.getFloors());
+        contoller.moveElevators(building.getElevators(), building.getFloors());
+        contoller.moveElevators(building.getElevators(), building.getFloors());
         
     }
     

@@ -89,7 +89,7 @@ public class Floor {
 
     public Rider getFromUpQue() {
         Rider retRider = null;
-        if (hasRidersGoingUp()) {
+        if (!waitUp.isEmpty()) {
             retRider = waitUp.dequeue();
         }
         setButton();
@@ -121,9 +121,10 @@ public class Floor {
         if (floor1.hasRidersGoingDown()) {
             System.out.println("Rider Going DOWN - PASS");
         }
+        floor1.getFromDownQue().riderToString();
         Rider test;
         test = floor1.getFromDownQue();
-        System.out.println(test.getStartFlr());
+        
 
     }
 

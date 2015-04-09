@@ -85,6 +85,13 @@ public class Rider {
     public int getTotalTime() {
         return this.stopTime - this.startTime;
     }
+    
+    public void riderToString(){
+        System.out.println("**********************************");
+        System.out.println("Rider Id    is " + this.id);
+        System.out.println("Start Floor is " + this.startFloor);
+        System.out.println("Dest  Floor is " + this.destFloor);
+    }
 
     public static void main(String[] args) {
 

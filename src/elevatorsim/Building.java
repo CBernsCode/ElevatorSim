@@ -38,14 +38,11 @@ public class Building {
             floors[i] = new Floor();
         }
         this.eleController = new ElevatorController();
-        loadRiders(riders);
-
-    }
-
-    public void loadRiders(Rider[] riders) {
         for (Rider rdrs : riders) {
-            this.floors[rdrs.getStartFlr()].joinLine(rdrs);
+            //rdrs.setStartFlr(Clock.getTime());
+            floors[rdrs.getStartFlr()].joinLine(rdrs);
         }
+
     }
 
     public Floor[] getFloors() {

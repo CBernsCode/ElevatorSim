@@ -51,9 +51,12 @@ public class Elevator {
 
     //get a rider, get dest floor, place on propper list
     public void embarkRider(Rider rider) {
+        
         try {
+            
             anchors[rider.getDestFloor()].add(rider);
             passengers++;
+            //rider.riderToString();
         } catch (Exception e) {
             System.out.println("Error in embarkRider");
         }
@@ -67,9 +70,13 @@ public class Elevator {
             passengers--;
 
         } catch (Exception e) {
-            System.out.println("Error in disembark");
+            //
         }
         opperateButtons();
+        if(rider != null){
+            rider.setStopTime(Clock.getTime());
+            passengers--;
+        }
         return rider;
     }
 
@@ -159,6 +166,14 @@ public class Elevator {
         }
     }
 
+    public void eleToString(){
+        System.out.println("***********************");
+        System.out.println("Elevator ID   " + this.id);
+        System.out.println("Current  Flr  " + this.currentFloor);
+        System.out.println("Going    Up   " + hasRidersGoingUp());
+        System.out.println("Going    Down " + hasRidersGoingDown());
+        System.out.println("# of Riders   " + this.passengers);
+    }
     public static void main(String[] args) {
 
         Config.numFloors = 10;
