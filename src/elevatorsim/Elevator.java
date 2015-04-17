@@ -2,13 +2,6 @@ package elevatorsim;
 
 import java.util.LinkedList;
 
-/*This is the elevator for the simulator, is passed Riders from
- Floor queues depending on capcity and direction. The riders are
- stored in linked list anchored to an array so that the current floor
- will point to the anchor with the right linked list.
- *
- * @author Chris Berns
- */
 public class Elevator {
 
     public enum elevatorDirections {
@@ -75,8 +68,10 @@ public class Elevator {
         opperateButtons();
         if(rider != null){
             rider.setStopTime(Clock.getTime());
-            passengers--;
+            DataCollector.addRiderToList(rider);
+            
         }
+        
         return rider;
     }
 

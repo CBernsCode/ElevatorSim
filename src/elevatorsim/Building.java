@@ -52,5 +52,9 @@ public class Building {
     public Elevator[] getElevators() {
         return this.elevators;
     }
+    
+    public ElevatorController getController(){
+        return this.eleController;
+    }
 
 }

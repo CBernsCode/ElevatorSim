@@ -1,17 +1,6 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package elevatorsim;
 
-import java.util.Random;
-
-/**
- *
- * @author chris
- */
 public class ElevatorController {
 
     public ElevatorController() {
@@ -81,11 +70,9 @@ public class ElevatorController {
         Config.numElevators = 3;
         Config.numRiders = 15;
         Config.numFloors = 4;
+        
         Rider[] testRiders = Config.initRiders();
-       // for (Rider rdr : testRiders) {
-        //    rdr.riderToString();
-        //}
-
+       
         Building building = new Building(testRiders);
         ElevatorController eleContrl = new ElevatorController();
        

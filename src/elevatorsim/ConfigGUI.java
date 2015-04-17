@@ -8,7 +8,6 @@ package elevatorsim;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.AdjustmentListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -64,7 +63,9 @@ public class ConfigGUI extends JFrame {
 
             //States are already saved just need to sucessfully exit
             public void actionPerformed(ActionEvent ae) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                setVisible(false);
+                MAIN.mainLoop();
+                System.exit(0);
             }
         });
         add(button);

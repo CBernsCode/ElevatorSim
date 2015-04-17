@@ -59,13 +59,7 @@ public class Rider {
 
     //I wanted to add ability to track total waiting in que
     //MIGHT TOSS
-    public void callElevator() {
-        ridersInQueue++;
-    }
-
-    public void arrive() {
-        ridersInQueue--;
-    }
+  
 
     public boolean isGoingUp() {
         boolean retVal = true;
@@ -97,8 +91,7 @@ public class Rider {
 
         Rider a1 = new Rider();
         Rider a2 = new Rider();
-        a1.callElevator();
-        a2.callElevator();
+       
         if (Rider.getRiderInQue() != 2) {
             System.out.print("Riders added to Que - FAIL\n");
         }
@@ -112,8 +105,7 @@ public class Rider {
         if (a1.isGoingUp()) {
             System.out.print("isGoingUp(false) - FAIL");
         }
-        a1.arrive();
-        a2.arrive();
+       
         if (Rider.getRiderInQue() != 0) {
             System.out.print("Riders remove from Que - FAIL\n");
         }

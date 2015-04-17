@@ -3,15 +3,6 @@ package elevatorsim;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * FloorQueue will be the lines on each floor for going up and going down they
- * will also be what is used to determine the state of the elevator button The
- * FloorQueue is implemented as a linked list and will null is dequeue is called
- * on an empty list
- *
- *
- * @author chris
- */
 public class FloorQueue {
 
     Queue<Rider> floorQueue = new LinkedList<>();
