@@ -25,19 +25,25 @@ public class MAIN {
         System.out.println("Main Loop");
         Rider[] testRiders = Config.initRiders();
         Building building = new Building(testRiders);
-        
-        System.out.println(building.getFloors()[0].hasRidersGoingUp());
-        
-        while(DataCollector.howManyFinished() != Config.numRiders){
-            
+
+        //System.out.println(building.getFloors()[0].hasRidersGoingUp());
+        Clock clock = new Clock();
+        Thread timer = new Thread(clock);
+        timer.start();
+
+        while (DataCollector.howManyFinished() != Config.numRiders) {
+
             building.getController().moveElevators(building.getElevators(),
                     building.getFloors());
-            for(Elevator ele : building.getElevators()){
+            for (Elevator ele : building.getElevators()) {
                 ele.eleToString();
             }
-            System.out.println(DataCollector.howManyFinished());
+            //System.out.println(DataCollector.howManyFinished());
         }
-        
+        System.out.println(DataCollector.getRiderByIndex(0).getTotalTime());
+        System.out.println(DataCollector.getRiderByIndex(10).getTotalTime());
+        System.out.println(DataCollector.getRiderByIndex(300).getTotalTime());
+        timer.interrupt();
     }
 
 }

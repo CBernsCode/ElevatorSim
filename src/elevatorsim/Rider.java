@@ -58,8 +58,7 @@ public class Rider {
     }
 
     //I wanted to add ability to track total waiting in que
-    //MIGHT TOSS
-  
+    //MIGHT TOSS  
 
     public boolean isGoingUp() {
         boolean retVal = true;

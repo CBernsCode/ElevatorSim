@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package elevatorsim;
 
 /*The building holds all of the individual objects and the controller for the
  *Elevators  and places the riders on the correct floor
+ *This class initializes all of componesnts of the building
  * @author chris
  */
 public class Building {
@@ -42,7 +39,6 @@ public class Building {
             //rdrs.setStartFlr(Clock.getTime());
             floors[rdrs.getStartFlr()].joinLine(rdrs);
         }
-
     }
 
     public Floor[] getFloors() {
@@ -56,5 +52,4 @@ public class Building {
     public ElevatorController getController(){
         return this.eleController;
     }
-
 }

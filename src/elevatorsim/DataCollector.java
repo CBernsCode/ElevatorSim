@@ -1,7 +1,11 @@
 package elevatorsim;
 
 import java.util.LinkedList;
-
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.*;
 /**
  *
  * @author chris
@@ -55,5 +59,18 @@ public class DataCollector {
         }
         return retVal;
     }
+    
+    public static Rider getRiderByIndex(int a){
+        Rider retRdr = null;
+        try{
+            retRdr = list.get(a);
+        }
+        catch( Exception e){
+            
+        }        
+        return retRdr;
+    }
+    
+    
     
 }

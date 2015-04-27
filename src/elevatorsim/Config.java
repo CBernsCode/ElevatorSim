@@ -59,7 +59,7 @@ public class Config {
         
         //add different types of generating based off type
         for(int i = 0 ; i < riders.length; i++){
-            riders[i] = new Rider(0,Config.numFloors -1);
+            riders[i] = new Rider(0,rand.nextInt(Config.numFloors - 1)+1);
         }
         
         return riders;

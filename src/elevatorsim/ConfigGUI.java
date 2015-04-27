@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package elevatorsim;
 
 import java.awt.*;
@@ -62,6 +58,7 @@ public class ConfigGUI extends JFrame {
         button.addActionListener(new ActionListener() {
 
             //States are already saved just need to sucessfully exit
+            @Override
             public void actionPerformed(ActionEvent ae) {
                 setVisible(false);
                 MAIN.mainLoop();
