@@ -148,7 +148,6 @@ public class Elevator {
             anchors[i] = new <Rider>LinkedList();
             buttons[i] = new ElevatorButton(Integer.toString(i));
         }
-
     }
 
     private void opperateButtons() {
@@ -185,7 +184,5 @@ public class Elevator {
 
         ele.moveUp();
         System.out.println(ele.hasRidersGoingUp());
-
     }
-
 }

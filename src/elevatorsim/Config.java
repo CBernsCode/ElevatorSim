@@ -1,4 +1,3 @@
-
 package elevatorsim;
 
 import java.util.Random;
@@ -9,16 +8,19 @@ import java.util.Random;
  */
 public class Config {
 
-    public enum simType{NORMAL , ASSENT, DESSENT}
+    public  enum simType {
+
+        NORMAL, ASSENT, DESSENT
+    }
     public static String title = "Elevator Sim";
-    public static int numFloors = 1;
+    public static int numFloors = 2;
     public static int numElevators = 1;
-    public static int numRiders = 0;
+    public static int numRiders = 1;
     public static int capOfElevators = 10;
     public static simType typeOfSim = simType.NORMAL;
 
     public static void setNumFloors(int a) {
-        numFloors = a;        
+        numFloors = a;
     }
 
     public static void setNumElevators(int a) {
@@ -52,24 +54,29 @@ public class Config {
         }
         return riders;
     }
-    
-    public static Rider[] initRiders(){
+
+    public static Rider[] initRiders() {
         Random rand = new Random(System.currentTimeMillis());
         Rider[] riders = new Rider[numRiders];
-        
-        //add different types of generating based off type
-        for(int i = 0 ; i < riders.length; i++){
-            riders[i] = new Rider(0,rand.nextInt(Config.numFloors - 1)+1);
-        }
-        
-        return riders;
-        
-    }
-    
-    /*To-Do make a method that reads from a text file and uses it
-    as test data. 
-    */
 
+        //add different types of generating based off type
+        if (Config.typeOfSim == simType.ASSENT) {            
+            for (int i = 0; i < riders.length; i++) {
+                riders[i] = new Rider(0, rand.nextInt(Config.numFloors - 1) + 1);
+            }
+        } else if (Config.typeOfSim == simType.DESSENT) {           
+            for (int i = 0; i < riders.length; i++) {
+                riders[i] = new Rider(rand.nextInt(Config.numFloors - 1) + 1, 0);
+            }            
+        } else {   
+            for (int i = 0; i < riders.length; i++) {
+                riders[i] = new Rider(rand.nextInt(Config.numFloors - 1) + 1, rand.nextInt(Config.numFloors - 1) + 1);
+            }
+        }       
+        return riders;
+    }
+
+   
     public static void main(String[] argc) {
         Config.numElevators = 10;
         if (Config.numElevators != 10) {

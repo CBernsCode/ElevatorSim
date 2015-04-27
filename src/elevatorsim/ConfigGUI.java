@@ -84,7 +84,7 @@ public class ConfigGUI extends JFrame {
             JSlider source = (JSlider) ce.getSource();
             if (!source.getValueIsAdjusting()) {
                 Config.numRiders = (int) source.getValue();
-                System.out.println(Config.numRiders);
+                System.out.println(Config.numRiders + " Riders");
             }
         }
     }
@@ -96,10 +96,10 @@ public class ConfigGUI extends JFrame {
             JSlider source = (JSlider) ce.getSource();
             if (!source.getValueIsAdjusting()) {
                 Config.numFloors = (int) source.getValue();
-                if (Config.numFloors < 1) {
-                    Config.numFloors = 1;
+                if (Config.numFloors < 2) {
+                    Config.numFloors = 2;
                 }
-                System.out.println(Config.numFloors);
+                System.out.println(Config.numFloors + " Floors");
             }
         }
     }
@@ -112,7 +112,7 @@ class ElevatorAdjustmentListener implements ChangeListener {
         JSlider source = (JSlider) ce.getSource();
         if (!source.getValueIsAdjusting()) {
             Config.numElevators = (int) source.getValue();
-            System.out.println(Config.numElevators);
+            System.out.println(Config.numElevators + " Elevators");
         }
     }
 }

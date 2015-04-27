@@ -56,6 +56,10 @@ public class Rider {
     public int getDestFloor() {
         return this.destFloor;
     }
+    
+    public int getId(){
+        return this.id;
+    }
 
     //I wanted to add ability to track total waiting in que
     //MIGHT TOSS  
@@ -85,6 +89,14 @@ public class Rider {
         System.out.println("Start Floor is " + this.startFloor);
         System.out.println("Dest  Floor is " + this.destFloor);
     }
+    
+    @Override
+    public String toString(){
+        String retString = "";
+        retString +="ID " + this.getId() + " strtFlr " + this.startFloor + 
+                " stpFlr " + this.destFloor + " total time " + this.getTotalTime();
+        return retString;
+    }
 
     public static void main(String[] args) {
 
@@ -104,9 +116,6 @@ public class Rider {
         if (a1.isGoingUp()) {
             System.out.print("isGoingUp(false) - FAIL");
         }
-       
-        if (Rider.getRiderInQue() != 0) {
-            System.out.print("Riders remove from Que - FAIL\n");
-        }
+        System.out.println(a1.toString());
     }
 }

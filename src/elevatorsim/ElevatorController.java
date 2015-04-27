@@ -1,4 +1,3 @@
-
 package elevatorsim;
 
 public class ElevatorController {
@@ -9,25 +8,22 @@ public class ElevatorController {
 
     public void moveElevators(Elevator[] elevators, Floor[] floors) {
 
-        //need to start some varibles to keep track of things
-        //Derive needed moves here
         boolean dispatched = true;
-        for(Floor flr : floors){
-            if(flr.hasRidersGoingDown() || flr.hasRidersGoingUp()){
-                dispatched = false;
-            }
-        }
-
-        //if it has passengers continue moving. Move one empty one if not
         for (Elevator ele : elevators) {
-            if (ele.getCurrentFloor() == 0 && ele.isEmpty()) {
-                while (!ele.isFull() && floors[ele.getCurrentFloor()].hasRidersGoingUp()) {
-                    //testing here
-                    Rider ride;
-                    ride = floors[ele.getCurrentFloor()].getFromUpQue();                   
-                    ele.embarkRider(ride);
+            for (int i = ele.getCurrentFloor(); i < Config.numFloors; i++) {
+                if (floors[i].hasRidersGoingUp() || floors[i].hasRidersGoingDown()) {
+                    dispatched = false;
                 }
-            } else if (ele.hasRidersGoingUp()) {
+            }
+            if (ele.isEmpty() && dispatched == false) {
+                while (!ele.isFull() && floors[ele.getCurrentFloor()].hasRidersGoingUp()) {
+                    ele.embarkRider(floors[ele.getCurrentFloor()].getFromUpQue());
+                }
+                while (!ele.isFull() && floors[ele.getCurrentFloor()].hasRidersGoingDown()) {
+                    ele.embarkRider(floors[ele.getCurrentFloor()].getFromDownQue());
+                }
+                ele.moveUp();
+            } else if (ele.hasRidersGoingUp()) {                
                 ele.moveUp();
                 while (ele.disembarkRider() != null) {
                     ele.disembarkRider();
@@ -43,7 +39,7 @@ public class ElevatorController {
                 while (!ele.isFull() && floors[ele.getCurrentFloor()].hasRidersGoingDown()) {
                     ele.embarkRider(floors[ele.getCurrentFloor()].getFromDownQue());
                 }
-            } else if (ele.isEmpty() && dispatched == false) {
+            } else if (ele.isEmpty() && dispatched == false) {                
                 ele.moveUp();
                 dispatched = true;
                 while (ele.disembarkRider() != null) {
@@ -52,7 +48,7 @@ public class ElevatorController {
                 while (!ele.isFull() && floors[ele.getCurrentFloor()].hasRidersGoingUp()) {
                     ele.embarkRider(floors[ele.getCurrentFloor()].getFromUpQue());
                 }
-            } else {
+            } else {               
                 ele.moveDown(); // default is to move to bottom
                 while (ele.disembarkRider() != null) {
                     ele.disembarkRider();
@@ -62,7 +58,6 @@ public class ElevatorController {
                 }
             }
         }
-
     }
 
     public static void main(String[] args) {
@@ -70,12 +65,12 @@ public class ElevatorController {
         Config.numElevators = 3;
         Config.numRiders = 15;
         Config.numFloors = 4;
-        
+
         Rider[] testRiders = Config.initRiders();
-       
+
         Building building = new Building(testRiders);
         ElevatorController eleContrl = new ElevatorController();
-       
+
         for (Elevator ele : building.getElevators()) {
             ele.eleToString();
         }

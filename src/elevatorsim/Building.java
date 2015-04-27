@@ -52,4 +52,8 @@ public class Building {
     public ElevatorController getController(){
         return this.eleController;
     }
+    
+    public void mainCycle(){
+        eleController.moveElevators(elevators, floors);
+    }
 }
