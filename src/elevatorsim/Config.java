@@ -10,7 +10,7 @@ public class Config {
 
     public  enum simType {
 
-        NORMAL, ASSENT, DESSENT
+        NORMAL, ASSENT, DESCENT
     }
     public static String title = "Elevator Sim";
     public static int numFloors = 2;
@@ -64,7 +64,7 @@ public class Config {
             for (int i = 0; i < riders.length; i++) {
                 riders[i] = new Rider(0, rand.nextInt(Config.numFloors - 1) + 1);
             }
-        } else if (Config.typeOfSim == simType.DESSENT) {           
+        } else if (Config.typeOfSim == simType.DESCENT) {           
             for (int i = 0; i < riders.length; i++) {
                 riders[i] = new Rider(rand.nextInt(Config.numFloors - 1) + 1, 0);
             }            

@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import elevatorsim.Config.simType;
+
 /**
  * April 27, 2015
  * @author Chris Berns
@@ -21,45 +23,45 @@ public class MAIN {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        Scanner scan = new Scanner(System.in);
-        int choice = 0;
-        boolean done = false;
-        while (!done) {
-            done = true;
-            optionMenu();
-            try{
-             choice = scan.nextInt();   
-            } catch(Exception e){
-                System.out.println("Please input a integer choice");
-                scan = new Scanner(System.in);
-            }
-            
-            switch (choice) {
-
-                case 1:
-                    Config.typeOfSim = Config.simType.ASSENT;
-                    done = true;
-                    break;
-                case 2:
-                    Config.typeOfSim = Config.simType.DESSENT;
-                    break;
-                case 3:
-                    Config.typeOfSim = Config.simType.NORMAL;
-                    break;
-                default:
-                    done = false;
-                    System.out.println("Invalid - try again");
-                    break;
-            }
-        }
-        //DataCollector data = new DataCollector();
-        System.out.println("Please use the GUI to set simulation");
+        Config.typeOfSim = querySimType();
         ConfigGUI gui = new ConfigGUI();
-//
     }
 
-    public static void optionMenu() {
+    private static simType querySimType() {
+    	try {
+    		return lookupSimType(getSimMode());
+    	} catch (UnknownSimTypeException e) {
+    		System.out.println("Invalid - try again");
+    		return querySimType();
+    	}
+    }
+
+    public static simType lookupSimType(int choice) {
+    	switch (choice) {
+
+    	case 1:
+    		return Config.simType.ASSENT;
+    	case 2:
+    		return Config.simType.DESCENT;
+    	case 3:
+    		return Config.simType.NORMAL;
+    	}
+    	throw new UnknownSimTypeException();
+    }
+
+	private static int getSimMode() {
+		Scanner scan = new Scanner(System.in); 
+		optionMenu();
+        int choice = 0;
+        try{
+         choice = Integer.parseInt(scan.nextLine());
+        } catch(Exception e){
+            System.out.println("Please input a integer choice");
+        }
+		return choice;
+	}
+
+	public static void optionMenu() {
         System.out.println("What mode would you like?");
         System.out.println("1) for total ascent");
         System.out.println("2) for total descent");

@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
 public class ConfigGUI extends JFrame {
 
     public ConfigGUI() {
+        System.out.println("Please use the GUI to set simulation");
 
         setTitle("Elevator Configuration");
         setSize(500, 500);
